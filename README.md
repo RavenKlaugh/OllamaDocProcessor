@@ -25,7 +25,7 @@ The tool is especially useful for:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/OllamaDocProcessor.git
+git clone https://github.com/RavenKlaugh/OllamaDocProcessor.git
 cd OllamaDocProcessor
 
 # Install dependencies
