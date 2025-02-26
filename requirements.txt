@@ -1,0 +1,6 @@
+requests>=2.28.1
+PyPDF2>=3.0.0
+python-docx>=0.8.11
+pathlib>=1.0.1
+typing>=3.7.4.3
+argparse>=1.4.0
