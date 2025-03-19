@@ -206,7 +206,7 @@ class DocumentProcessorGUI:
         self.output_text.delete("1.0", tk.END)
         
         # Create or clear output file
-        output_file = Path(target_dir) / 'out.txt'
+        output_file = Path(target_dir) / 'out.md'
         output_file.touch(exist_ok=True)
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write("")
@@ -220,7 +220,7 @@ class DocumentProcessorGUI:
         self.output_text.insert(tk.END, "\nStop requested. Finishing current task...\n")
     
     def process_documents(self, target_dir, prompt, max_words, model, api_url):
-        output_file = Path(target_dir) / 'out.txt'
+        output_file = Path(target_dir) / 'out.md'
         for file_path in Path(target_dir).glob('*.*'):
             # Check if process was interrupted
             if self.stop_processing:
@@ -228,7 +228,7 @@ class DocumentProcessorGUI:
                 break
             
             if (file_path.suffix.lower() in ['.txt', '.pdf', '.doc', '.docx'] and 
-                file_path.name != 'out.txt'):
+                file_path.name != 'out.md'):
                 self.output_text.insert(tk.END, f"\nProcessing file: {file_path}\n")
                 self.output_text.see(tk.END)
                 
@@ -248,7 +248,7 @@ class DocumentProcessorGUI:
                         )
                         self.output_text.insert(tk.END, f"Response for {file_path.name}:\n{response}\n")
                         with open(output_file, 'a', encoding='utf-8') as f:
-                            f.write(f"\n\n=== Response for {file_path.name} ===\n")
+                            f.write(f"\n\n## Response for {file_path.name} \n")
                             f.write(response)
                     else:
                         for i, chunk in enumerate(chunk_text(text, max_words), 1):
@@ -260,7 +260,7 @@ class DocumentProcessorGUI:
                             )
                             self.output_text.insert(tk.END, f"Response for {file_path.name} (chunk {i}):\n{response}\n")
                             with open(output_file, 'a', encoding='utf-8') as f:
-                                f.write(f"\n\n=== Response for {file_path.name} (chunk {i}) ===\n")
+                                f.write(f"\n\n## Response for {file_path.name} (chunk {i}) \n")
                                 f.write(response)
                 except Exception as e:
                     error_msg = f"Error processing {file_path}: {str(e)}\n"
